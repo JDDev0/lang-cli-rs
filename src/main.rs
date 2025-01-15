@@ -66,7 +66,7 @@ fn main() -> ExitCode {
                 "-printReturnedValue" => print_returned_value = true,
                 "-warnings" => warnings = true,
                 "-langArgs" | "--" => {
-                    lang_args = Some(args[i + 1..].iter().map(|str| Box::from(&**str)).collect());
+                    lang_args = Some(args[execution_args_start_index + i + 1..].iter().map(|str| Box::from(&**str)).collect());
                     break;
                 },
                 _ => {
