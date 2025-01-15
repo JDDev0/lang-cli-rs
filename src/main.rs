@@ -87,7 +87,7 @@ fn main() -> ExitCode {
     }
 
     match &*args[0] {
-        "printTokens" => {
+        "-printTokens" => {
             if args.len() != 2 {
                 eprintln!("\"printTokens\" requires exactly one file argument");
 
@@ -122,7 +122,7 @@ fn main() -> ExitCode {
             ExitCode::SUCCESS
         },
 
-        "printAST" => {
+        "-printAST" => {
             if args.len() != 2 {
                 eprintln!("\"printAST\" requires exactly one file argument");
 
