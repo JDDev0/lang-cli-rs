@@ -168,7 +168,7 @@ fn print_help(binary_name: Option<&str>) {
     let binary_name = binary_name.unwrap_or("lang");
 
     let header_str = format!("langRS version {} (lang-cli {})", Interpreter::VERSION, env!("CARGO_PKG_VERSION"));
-    
+
     println!("{header_str}");
     println!("{}", "=".repeat(header_str.len()));
     println!("Interprets Lang code & files");
@@ -200,7 +200,7 @@ fn execute_lang_code(lang_code: &str, print_translations: bool, print_returned_v
 
     let mut interpreter = Interpreter::new(
         current_dir.to_str().unwrap(),
-        Some(""),
+        None,
         None,
         Box::new(DefaultPlatformAPI::new()),
         lang_args,
