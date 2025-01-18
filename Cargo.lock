@@ -74,9 +74,9 @@ checksum = "1fd0f2584146f6f2ef48085050886acf353beff7305ebd1ae69500e27c67f64b"
 
 [[package]]
 name = "cc"
-version = "1.2.9"
+version = "1.2.10"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "c8293772165d9345bdaaa39b45b2109591e63fe5e6fbc23c6ff930a048aa310b"
+checksum = "13208fcbb66eaeffe09b99fffbe1af420f00a7b35aa99ad683dfc1aa76145229"
 dependencies = [
  "shlex",
 ]
@@ -316,9 +316,9 @@ dependencies = [
 
 [[package]]
 name = "lang-interpreter"
-version = "0.0.3"
+version = "0.0.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "9191139f49cc9502a05321b382d8bdde307424597b3a408baaca54a1658dd885"
+checksum = "49a4376f72a23ae60187224bb32fa78e9fb73badbf87236f750793f62796d8e4"
 dependencies = [
  "ahash",
  "chrono",
@@ -332,9 +332,9 @@ dependencies = [
 
 [[package]]
 name = "lang-interpreter-macros"
-version = "0.2.0"
+version = "0.2.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "71a8bd740491542c3c39990838db110ad318b7b4e9d0d90b3936814b4bc3ffb2"
+checksum = "a0036ab16680a5c5df25b0937e05ccccb62b55241df9665727fdf3b0812f7187"
 dependencies = [
  "darling",
  "proc-macro2",

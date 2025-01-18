@@ -3,9 +3,9 @@ use std::fs::File;
 use std::io::Read;
 use std::path::Path;
 use std::process::ExitCode;
-use lang_interpreter::interpreter::Interpreter;
+use lang_interpreter::interpreter::{conversions, lii, ErrorOutputFlag, Interpreter};
 use lang_interpreter::interpreter::platform::{DefaultPlatformAPI, PlatformAPI};
-use lang_interpreter::lexer::Lexer;
+use lang_interpreter::lexer::{CodePosition, Lexer};
 use lang_interpreter::parser::Parser;
 
 fn main() -> ExitCode {
@@ -207,12 +207,12 @@ fn execute_lang_code(lang_code: &str, print_translations: bool, print_returned_v
     );
 
     if warnings {
-        //TODO interpreter.setErrorOutputFlag(LangInterpreter.ExecutionFlags.ErrorOutputFlag.ALL);
+        lii::set_error_output_flag(&mut interpreter, ErrorOutputFlag::All);
     }
 
     interpreter.interpret_lines(lang_code);
 
-    //TODO printPostExecutionOutput(interpreter, printTranslations, printReturnedValue);
+    print_post_execution_output(&mut interpreter, print_translations, print_returned_value);
 
     ExitCode::SUCCESS
 }
@@ -251,12 +251,45 @@ fn execute_lang_file(lang_file: &str, print_translations: bool, print_returned_v
     );
 
     if warnings {
-        //TODO interpreter.setErrorOutputFlag(LangInterpreter.ExecutionFlags.ErrorOutputFlag.ALL);
+        lii::set_error_output_flag(&mut interpreter, ErrorOutputFlag::All);
     }
 
     interpreter.interpret_lines(String::from_utf8_lossy(&code));
 
-    //TODO printPostExecutionOutput(interpreter, printTranslations, printReturnedValue);
+    print_post_execution_output(&mut interpreter, print_translations, print_returned_value);
 
     ExitCode::SUCCESS
+}
+
+fn print_post_execution_output(interpreter: &mut Interpreter, print_translations: bool, print_returned_value: bool) {
+    if print_translations {
+        let data = interpreter.data_ref();
+        let translations = data.lang();
+        println!("-------------- Translations --------------");
+        for (key, value) in translations {
+            println!("{key} = {value}");
+        }
+    }
+    if print_returned_value {
+        let is_throw_value = lii::is_returned_value_throw_value(interpreter);
+        let ret_value = lii::get_and_reset_return_value(interpreter);
+        if is_throw_value {
+            println!("-------------- Thrown value --------------");
+            let ret_value = ret_value.and_then(|ret_value| ret_value.error_value());
+            let Some(ret_value) = ret_value else {
+                println!("Invalid error");
+
+                return;
+            };
+
+            println!("Error code: \"{}\"\nError message: \"{}\"", ret_value.err().error_code(), ret_value.err().error_text());
+        }else {
+            println!("------------- Returned Value -------------");
+            if let Some(ret_value) = ret_value {
+                println!("Returned Value: \"{}\"", conversions::to_text(interpreter, &ret_value, CodePosition::EMPTY));
+            }else {
+                println!("No returned value");
+            }
+        }
+    }
 }
