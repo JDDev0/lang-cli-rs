@@ -316,9 +316,9 @@ dependencies = [
 
 [[package]]
 name = "lang-interpreter"
-version = "0.0.7"
+version = "0.0.8"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "412e06554ac40f0ec3a724b20b786167b3730f01d42a60ae453f61ceab9a5877"
+checksum = "1cc93feb84cda2f80068651f9c1c61d16675d3c35a6f63900d5d49a2d425f5e9"
 dependencies = [
  "ahash",
  "chrono",
