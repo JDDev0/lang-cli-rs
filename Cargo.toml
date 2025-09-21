@@ -1,6 +1,6 @@
 [package]
 name = "lang-cli"
-version = "0.1.5-dev"
+version = "0.1.5"
 edition = "2024"
 authors = ["JDDev0 <jddev0@dorneger.at>"]
 description = "CLI interface for the langRS implementation of the Lang Programming Language"
