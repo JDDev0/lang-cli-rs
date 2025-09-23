@@ -1,6 +1,6 @@
 [package]
 name = "lang-cli"
-version = "0.1.6"
+version = "0.1.7"
 edition = "2024"
 authors = ["JDDev0 <jddev0@dorneger.at>"]
 description = "CLI interface for the langRS implementation of the Lang Programming Language"
@@ -19,4 +19,4 @@ all-features = true
 targets = ["x86_64-unknown-linux-gnu"]
 
 [dependencies]
-lang-interpreter = "0.0.9"
+lang-interpreter = "0.0.10"
